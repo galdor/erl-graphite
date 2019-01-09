@@ -68,10 +68,10 @@ handle_call({enqueue_point, Point}, _From, State) ->
   {reply, ok, State#state{queue = [Point2 | State#state.queue],
                           queue_length = State#state.queue_length + 1}};
 
-handle_call(Request, _From, State) ->
+handle_call(_Request, _From, State) ->
   {noreply, State}.
 
-handle_cast(Request, State) ->
+handle_cast(_Request, State) ->
   {noreply, State}.
 
 handle_info(connect, State) ->
@@ -107,7 +107,7 @@ handle_info({tcp_closed, _}, State) ->
   ?LOG_INFO("connection closed"),
   {noreply, schedule_connection(State)};
 
-handle_info(Info, State) ->
+handle_info(_Info, State) ->
   {noreply, State}.
 
 -spec schedule_connection(state()) -> state().
